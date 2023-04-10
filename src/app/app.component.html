@@ -1,2 +1,10 @@
 <h1>{{ age }}</h1>
 <h2>{{ name }}</h2>
+
+<hr>
+
+<input type="text" [value]="age">
+
+<button (click)="clickMe()">Click Me !</button>
+
+<input type="text" [(ngModel)]="name">

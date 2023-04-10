@@ -9,4 +9,7 @@ export class AppComponent {
   title = 'angular-learning';
   name = 'Cong Dat';
   age = 22;
+  clickMe() {
+    console.log("clicked !!!")
+  }
 }
