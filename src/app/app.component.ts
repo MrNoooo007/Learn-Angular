@@ -8,5 +8,11 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'angular-learning';
   name = 'Cong Dat';
-  age = 22;
+  age = 18;
+  increaseAge() {
+    this.age++;
+  }
+  decreaseAge() {
+    this.age--;
+  }
 }

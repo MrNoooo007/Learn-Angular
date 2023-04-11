@@ -1,2 +1,17 @@
 <h1>{{ age }}</h1>
-<h2>{{ name }}</h2>
+
+<hr>
+
+<div *ngIf="age >= 18; else lessThan18">
+  You are an adult
+</div>
+
+<ng-template #lessThan18>
+  <div>
+    you are a child
+  </div>
+</ng-template>
+
+
+<button (click)="increaseAge()">+</button>
+<button (click)="decreaseAge()">-</button>
