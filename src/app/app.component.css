@@ -1,0 +1,15 @@
+.isActive {
+  color: black;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.isDeactivate {
+  color: darkgrey;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.isRed {
+  background-color: red;
+}
