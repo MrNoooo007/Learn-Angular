@@ -9,4 +9,5 @@ export class AppComponent {
   title = 'angular-learning';
   name = 'Cong Dat';
   age = 22;
+  yourName = 'Nguyen Cong Dat';
 }

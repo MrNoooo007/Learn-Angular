@@ -1,2 +1,5 @@
-<h1>{{ age }}</h1>
+
+<input type="text" [ngModel]="name" (ngModelChange)="yourName = $event" />
+
+<h2>{{ yourName }}</h2>
 <h2>{{ name }}</h2>

@@ -1,4 +1,10 @@
 # Angular-learning
 
-- This is a repo to learn Angular
-- Test 1
+# Custom Two-way binding
+
+```
+<input type="text" [ngModel]="name" (ngModelChange)="yourName = $event" />
+```
+
+- [ngModel]: use to bind name to value of input
+- (ngModelChange): use to bind input value to name variable
