@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
+import {ChildComComponent} from "./child-com/child-com.component";
+import {ToggleComponent} from "./toggle/toggle.component";
 
 @Component({
   selector: 'app-root',
@@ -6,7 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-learning';
-  name = 'Cong Dat';
-  age = 22;
+  @ViewChild('toggle') toggle !: ToggleComponent;
+
+  toggleInside() {
+    this.toggle.toggle();
+  }
 }
