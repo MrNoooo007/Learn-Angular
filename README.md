@@ -1,4 +1,5 @@
 # Angular-learning
 
-- This is a repo to learn Angular
-- Test 1
+# ContentChild và ContentChildren trong Angular
+
+
