@@ -9,4 +9,5 @@ export class AppComponent {
   title = 'angular-learning';
   name = 'Cong Dat';
   age = 22;
+  now = '2020-06-24T09:00:00.000Z';
 }
