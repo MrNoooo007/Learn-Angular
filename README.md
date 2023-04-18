@@ -1,6 +1,6 @@
 # Angular-learning
 
-# Reactive Programming, RxJS và Observable
+# 1. Reactive Programming, RxJS và Observable
 > RxJS is a library for composing asynchronous and event-based programs by using observable sequences. RxJS Overview
 
 ## RxJS core concepts
@@ -24,7 +24,7 @@
 - Một scheduler sẽ điều khiển khi nào một subscription bắt đầu thực thi, và khi nào sẽ gửi tín hiệu đi.
 
 
-## Common Creation Operators
+## 2. Common Creation Operators
 
 ## of()
 > of() là operator dùng để tạo 1 Observable từ bất cứ giá trị gì: primitives, Array, Object, Function v.v... of() sẽ nhận vào các giá trị và sẽ complete ngay sau khi tất cả các giá trị truyền vào được emit.
@@ -111,3 +111,115 @@ timer(1000, 1000).subscribe(observer);
 // error: 'an error'
 throwError('an error').subscribe(observer);
 ```
+
+# 3. RxJS Transformation Operators
+
+## Pipeable Operators
+> Một Pipeable Operator là một function nó nhận đầu vào là một Observable và returns một Observable khác. Chúng là pure operation: Observable truyền vào sẽ không bị thay đổi gì.
+``` 
+const returnObservable = observableInstance.pipe(operator1(), operator2());
+```
+
+## map 
+> map<T, R>(project: (value: T, index: number) => R, thisArg?: any): OperatorFunction<T, R>
+``` 
+import { map } from 'rxjs/operators';
+
+source
+  .pipe(
+    map((user) => {
+      return {
+        ...user,
+        fullname: `${user.firstname} ${user.lastname}`,
+      };
+    })
+  )
+  .subscribe(observer);
+```
+
+## pluck
+> pluck<T, R>(...properties: string[]): OperatorFunction<T, R>
+``` 
+import { pluck } from 'rxjs/operators';
+source.pipe(pluck('id')).subscribe(observer);
+```
+
+## mapTo
+> mapTo<T, R>(value: R): OperatorFunction<T, R>
+``` 
+const element = document.querySelector('#hover');
+
+const mouseover$ = fromEvent(element, 'mouseover');
+const mouseleave$ = fromEvent(element, 'mouseleave');
+
+const hover$ = merge(
+  mouseover$.pipe(mapTo(true)),
+  mouseleave$.pipe(mapTo(false))
+);
+
+hover$.subscribe(observer);
+```
+
+## scan
+> scan<T, R>(accumulator: (acc: R, value: T, index: number) => R, seed?: T | R): OperatorFunction<T, R>
+``` 
+const button = document.querySelector('#add');
+
+const click$ = fromEvent(button, 'click');
+
+click$.pipe(scan((acc, curr) => acc + 1, 0)).subscribe(observer);
+```
+
+## reduce 
+> reduce<T, R>(accumulator: (acc: T | R, value: T, index?: number) => T | R, seed?: T | R): OperatorFunction<T, T | R>
+``` 
+users$.pipe(reduce((acc, curr) => acc + curr.postCount, 0)).subscribe(observer);
+```
+
+## toArray
+> toArray<T>(): OperatorFunction<T, T[]>
+``` 
+users$.pipe(reduce((acc, curr) => [...acc, curr], [])).subscribe(observer);
+```
+
+## buffer
+> buffer<T>(closingNotifier: Observable<any>): OperatorFunction<T, T[]>
+``` 
+const interval$ = interval(1000);
+
+const click$ = fromEvent(document, 'click');
+
+const buffer$ = interval$.pipe(buffer(click$));
+
+const subscribe = buffer$.subscribe((val) =>
+  console.log('Buffered Values: ', val)
+);
+
+// output có dạng
+'Buffered Values: '[(0, 1)];
+'Buffered Values: '[(2, 3, 4, 5, 6)];
+```
+
+## bufferTime
+> bufferTime<T>(bufferTimeSpan: number): OperatorFunction<T, T[]>
+``` 
+const source = interval(500);
+
+const bufferTime = source.pipe(
+  bufferTime(2000)
+);
+
+const bufferTimeSub = bufferTime.subscribe(
+  val => console.log('Buffered with Time:', val)
+);
+// output
+"Buffered with Time:"
+[0, 1]
+"Buffered with Time:"
+[2, 3]
+"Buffered with Time:"
+[4, 5]
+...
+```
+
+
