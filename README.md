@@ -24,3 +24,90 @@
 - Một scheduler sẽ điều khiển khi nào một subscription bắt đầu thực thi, và khi nào sẽ gửi tín hiệu đi.
 
 
+## Common Creation Operators
+
+## of()
+> of() là operator dùng để tạo 1 Observable từ bất cứ giá trị gì: primitives, Array, Object, Function v.v... of() sẽ nhận vào các giá trị và sẽ complete ngay sau khi tất cả các giá trị truyền vào được emit.
+
+``` 
+// output: 'hello'
+// complete: 'complete'
+of('hello').subscribe(observer);
+
+// output: [1, 2, 3]
+// complete: 'complete'
+of([1, 2, 3]).subscribe(observer);
+
+// output: 1, 2, 3, 'hello', 'world', {foo: 'bar'}, [4, 5, 6]
+// complete: 'complete'
+of(1, 2, 3, 'hello', 'world', { foo: 'bar' }, [4, 5, 6]).subscribe(observer);
+```
+
+
+## from()
+> from() cũng gần giống với of(), cũng được sử dụng để tạo Observable từ 1 giá trị. Tuy nhiên, điểm khác biệt đối với of() là from() chỉ nhận vào giá trị là một Iterable hoặc là một Promise.
+
+
+## fromEvent()
+> fromEvent() được dùng để chuyển đổi 1 sự kiện (Event) sang Observable. Ví dụ chúng ta có DOM Event như mouse click hoặc input.
+
+``` 
+const btn = document.querySelector('#btn');
+const input = document.querySelector('#input');
+
+// output (example): MouseEvent {...}
+// complete: không có gì log.
+fromEvent(btn, 'click').subscribe(observer);
+
+// output (example): KeyboardEvent {...}
+// complete: không có gì log.
+fromEvent(input, 'keydown').subscribe(observer);
+```
+
+## fromEventPattern()
+> fromEventPattern() là 1 dạng nâng cao của fromEvent(). Nói về concept thì fromEventPattern() cũng giống với fromEvent() là tạo Observable từ sự kiện. Tuy nhiên, fromEventPattern() rất khác với fromEvent() về cách dùng, cũng như loại sự kiện để xử lý. Để hiểu rõ hơn, chúng ta cùng tham khảo ví dụ sau:
+
+``` 
+// fromEvent() từ ví dụ trên
+// output: MouseEvent {...}
+fromEvent(btn, 'click').subscribe(observer);
+
+// fromEventPattern
+// output: MouseEvent {...}
+fromEventPattern(
+  (handler) => {
+    btn.addEventListener('click', handler);
+  },
+  (handler) => {
+    btn.removeEventListener('click', handler);
+  }
+).subscribe(observer);
+```
+
+## interval()
+> interval() là hàm để tạo Observable mà sẽ emit giá trị số nguyên từ số 0 theo 1 chu kỳ nhất định. Hàm này giống với setInterval.
+``` 
+// output: 0, 1, 2, 3, 4, ...
+interval(1000) // emit giá trị sau mỗi giây
+  .subscribe(observer);
+```
+
+## timer()
+> - Tạo Observable mà sẽ emit giá trị sau khi delay 1 khoảng thời gian nhất định. Cách dùng này sẽ tự complete nhé.
+> - Tạo Observable mà sẽ emit giá trị sau khi delay 1 khoảng thời gian và sẽ emit giá trị sau mỗi chu kỳ sau đó. Cách dùng này tương tự với interval() nhưng timer() hỗ trợ delay trước khi emit. Vì cách dùng này giống với interval() nên sẽ không tự complete.
+
+``` 
+// output: sau 1 giây -> 0
+// complete: 'complete'
+timer(1000).subscribe(observer);
+
+// output: sau 1 giây -> 0, 1, 2, 3, 4, 5 ...
+timer(1000, 1000).subscribe(observer);
+```
+
+## throwError()
+> throwError() sẽ dùng để tạo Observable mà thay vì emit giá trị, Observable này sẽ throw 1 error ngay lập tức sau khi subscribe
+``` 
+// error: 'an error'
+throwError('an error').subscribe(observer);
+```
