@@ -262,3 +262,10 @@ of() // an empty Observable
 ## distinct()
 
 
+# 4. RxJS Combination Operators (day - 23)
+
+# 5. RxJS Error Handling and Conditional Operators (day - 24)
+
+# 6. RxJS Higher Order Observables and Utility Operators (day - 25)
+
+# 7. RxJS Subject and Multicasting (day - 26)
