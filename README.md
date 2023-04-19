@@ -222,4 +222,43 @@ const bufferTimeSub = bufferTime.subscribe(
 ...
 ```
 
+# 4. RxJS Filtering Operators
+
+## filter()
+> filter<T>(predicate: (value: T, index: number) => boolean, thisArg?: any): MonoTypeOperatorFunction<T>
+```
+from([1, 2, 3, 4, 5, 6])
+  .pipe(
+    filter((x) => x % 2 === 0) // số chẵn
+  )
+  .subscribe(console.log); // output: 2, 4, 6
+```
+
+## first()
+> first<T, D>(predicate?: (value: T, index: number, source: Observable<T>) => boolean, defaultValue?: D): OperatorFunction<T, T | D>
+``` 
+from([1, 2, 3, 4, 5, 6])
+  .pipe(first())
+  .subscribe(console.log, null, () => console.log('complete')); // output: 1 -> complete
+
+of() // an empty Observable
+  .pipe(first())
+  .subscribe(null, console.log, null); // Error: EmptyError
+```
+
+
+## last()
+
+
+## find()
+
+
+## single()
+
+## take()
+
+## takeLast()
+
+## distinct()
+
 
