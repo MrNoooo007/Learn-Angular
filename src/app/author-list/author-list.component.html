@@ -1,0 +1,13 @@
+<app-author-detail
+    *ngFor="let author of authors; count as total"
+    [author]="author"
+    (select)="onSelected($event)"
+    (delete)="onDelete($event)"
+>
+</app-author-detail>
+
+<br>
+
+<h1>Current author: {{ currentAuthor.firstName }} - {{ currentAuthor.lastName }}</h1>
+
+<h2>total : {{ authors.length }}</h2>
