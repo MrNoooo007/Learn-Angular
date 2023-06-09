@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { ToggleComponent } from './toggle/toggle.component';
 
 @Component({
   selector: 'app-root',
@@ -24,4 +25,14 @@ export class AppComponent {
       name: "Cong Dat 4"
     },
   ]
+
+  @ViewChild(ToggleComponent, {static: true}) toggleComponent !: ToggleComponent;
+
+  ngOnInit() {
+    console.log("on init: " + this.toggleComponent.toggle)
+  }
+
+  ngAfterViewInit() {
+    console.log(this.toggleComponent.toggle)
+  }
 }
