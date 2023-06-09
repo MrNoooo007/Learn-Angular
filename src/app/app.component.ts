@@ -6,13 +6,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-learning';
-  name = 'Cong Dat';
-  age = 18;
-  increaseAge() {
-    this.age++;
-  }
-  decreaseAge() {
-    this.age--;
-  }
+  users = [
+    {
+      id: 1,
+      name: "Cong Dat 1"
+    },
+    {
+      id: 2,
+      name: "Cong Dat 2"
+    },
+    {
+      id: 3,
+      name: "Cong Dat 3"
+    },
+    {
+      id: 4,
+      name: "Cong Dat 4"
+    },
+  ]
 }
