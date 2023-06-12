@@ -43,4 +43,6 @@ export class AppComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit
   clickMe() {
     console.log("clicked !!!")
   }
+
+  currentDate = new Date;
 }
