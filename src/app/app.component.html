@@ -1,5 +1,7 @@
-<h1>
-    <a routerLink="/sign-in">Sign In</a>
-</h1>
+<h1>Hello Dat</h1>
 
-<router-outlet></router-outlet>
+<ul>
+    <li *ngFor="let post of posts">
+        {{ post['id'] }} - {{ post['title'] }} - {{ post['content'] }}
+    </li>
+</ul>
