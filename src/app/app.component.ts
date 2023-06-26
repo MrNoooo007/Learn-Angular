@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +6,4 @@ import {Component, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/c
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
-
 }
