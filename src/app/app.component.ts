@@ -1,21 +1,50 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
-  signUpForm: FormGroup;
-  onSubmit() {
-    console.log(this.signUpForm)
+export class AppComponent implements OnInit {
+  loadedPosts = [];
+  private url = 'https://example-jsi-1-default-rtdb.asia-southeast1.firebasedatabase.app/post.json';
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {}
+
+  onCreatePost(postData: { title: string; content: string }) {
+    // Send Http request
+    this.http
+      .post(
+        this.url,
+        postData
+      )
+      .subscribe(responseData => {
+        console.log(responseData);
+      });
   }
 
-  ngOnInit(): void {
-    this.signUpForm = new FormGroup({
-      'password': new FormControl(null, Validators.required),
-      'gmail': new FormControl(null, [Validators.required, Validators.email]),
-    });
+  onFetchPosts() {
+    // Send Http request
+    this.http.get(this.url).pipe(
+      map(response => {
+        const postArrays = [];
+        for(const key in response) {
+          if(response.hasOwnProperty(key)) {
+            postArrays.push({...response[key], id: key})
+          }
+        }
+        return postArrays;
+      })
+    ).subscribe(data => {
+      this.loadedPosts = data;
+    })
+  }
+
+  onClearPosts() {
+    // Send Http request
   }
 }
