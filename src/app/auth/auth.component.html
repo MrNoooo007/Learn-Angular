@@ -1,17 +1,26 @@
 <div class="row">
   <div class="col-xs-12 col-md-6 col-md-offset-3">
-    <form>
+    <div *ngIf="isLoading">
+      <app-loading-spinder></app-loading-spinder>
+    </div>
+    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit(signUpForm)" *ngIf="!isLoading">
       <div class="form-group">
         <label for="email">E-Mail</label>
-        <input type="email" id="email" class="form-control" />
+        <input type="email" id="email" formControlName="email" class="form-control" />
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" id="password" class="form-control" />
+        <input type="password" id="password" formControlName="password" class="form-control" />
       </div>
       <div>
-        <button class="btn btn-primary">Sign Up</button> |
-        <button class="btn btn-primary">Switch to Login</button>
+        <button
+          type="submit"
+          class="btn btn-primary" [disabled]="!signUpForm.valid">
+          {{ isLoginMode ? 'Login' : 'Sign Up' }}
+        </button> |
+        <button class="btn btn-primary" (click)="changeMode()">
+         Switch to {{ isLoginMode ? 'Sign Up' : 'Login' }}
+        </button>
       </div>
     </form>
   </div>
