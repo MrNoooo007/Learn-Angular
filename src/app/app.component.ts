@@ -1,23 +1,21 @@
-import { Component } from '@angular/core';
-import {delay, filter, forkJoin, from, fromEvent, map, Observable, of, pluck} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {Post} from "./model/post.model";
+import {PostService} from "./post.service";
+import {map, pluck} from "rxjs";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  _a: Observable<any> = from([1,2,3,4]);
+export class AppComponent implements OnInit {
+  posts !: Post[];
 
-  constructor() {
-    this._a.pipe(
-      filter(x => x % 2 != 0)
-    ).subscribe((data) => console.log(data))
+  constructor(private postService: PostService) {}
 
-    forkJoin(
-      of("Hello 1").pipe(delay(1000)),
-      of("Hello 2").pipe(delay(1000)),
-      of("Hello 3").pipe(delay(10000))
-    ).subscribe((data) => console.log(data))
+  ngOnInit(): void {
+    this.postService.getPost().subscribe(data => {
+      this.posts = data.content;
+    })
   }
 }

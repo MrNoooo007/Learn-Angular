@@ -1,2 +1,11 @@
+<div *ngIf="posts">
+  <ul *ngFor="let post of posts">
+    <li [routerLink]="['/posts', post.id]">
+      {{ post.id }} - {{ post.title }} - {{ post.description }}
+    </li>
+  </ul>
+</div>
 
-{{ 'Cong Dat' | fullName }}
+<div>
+  <router-outlet></router-outlet>
+</div>
