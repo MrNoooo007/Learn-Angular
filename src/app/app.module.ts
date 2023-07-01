@@ -3,10 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {FullNamePipe} from "./FullName.pipe";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FullNamePipe
   ],
   imports: [
     BrowserModule,

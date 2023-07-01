@@ -1,4 +1,4 @@
-# Angular-learning
-
-- This is a repo to learn Angular
-- Test 1
+- Create a class that implements PipeTransform
+- Override transform function to handle your logic
+- Add @Pipe with the name your want
+- Use your pipe with the name your define
